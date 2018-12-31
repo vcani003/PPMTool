@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
-    public final ResponseEntity<Object> handleProjectIdExcpetion(ProjectIdException ex, WebRequest request){
+    public final ResponseEntity<Object> handleProjectIdException(ProjectIdException ex, WebRequest request){
         ProjectIdExceptionResponse exceptionResponse = new ProjectIdExceptionResponse(ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
