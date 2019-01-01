@@ -19,25 +19,37 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/project")
 public class ProjectController {
-     @Autowired
+    @Autowired
     private ProjectService projectService;
 
-     @Autowired
-     private MapValidationErrorService mapValidationErrorService;
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
 
-     @PostMapping("")
-    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
+    @PostMapping("")
+    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
-         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-         if(errorMap!=null){
-             return errorMap;
-         }
-         Project project1 = projectService.saveOrUpdateProject(project);
-         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
-     }
-     @GetMapping("/{projectId}")
-    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
-         Project project = projectService.findProjectByIdentifier(projectId);
-         return new ResponseEntity<Project>(project,HttpStatus.OK);
-     }
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if (errorMap != null) {
+            return errorMap;
+        }
+        Project project1 = projectService.saveOrUpdateProject(project);
+        return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
+        Project project = projectService.findProjectByIdentifier(projectId);
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public Iterable<Project> getAllProjects(){
+        return projectService.findAllProjects();
+    }
+
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<?> deleteProject(@PathVariable String projectId){
+        projectService.deleteProjectByIdentifier(projectId);
+        return new ResponseEntity<String>("Project ID: " + projectId + " is deleted", HttpStatus.OK);
+    }
 }
