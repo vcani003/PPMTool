@@ -17,6 +17,7 @@ class AddProject extends Component {
       errors: {}
     };
 
+    //BIND input value to state 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -27,7 +28,7 @@ class AddProject extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-
+  //BIND input value to state
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -46,7 +47,7 @@ class AddProject extends Component {
 
   render() {
     const { errors } = this.state;
-
+    
     return (
       <div>
         <div className="project">
@@ -67,6 +68,7 @@ class AddProject extends Component {
                       placeholder="Project Name"
                       name="projectName"
                       value={this.state.projectName}
+                      //BIND input value to state
                       onChange={this.onChange}
                     />
                     {errors.projectName && (
@@ -84,6 +86,7 @@ class AddProject extends Component {
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
+                      //BIND input value to state
                       onChange={this.onChange}
                     />
                     {errors.projectIdentifier && (
@@ -101,6 +104,7 @@ class AddProject extends Component {
                       placeholder="Project Description"
                       name="description"
                       value={this.state.description}
+                      //BIND input value to state
                       onChange={this.onChange}
                     />
                     {errors.description && (
@@ -116,6 +120,7 @@ class AddProject extends Component {
                       className="form-control form-control-lg"
                       name="start_date"
                       value={this.state.start_date}
+                      //BIND input value to state
                       onChange={this.onChange}
                     />
                   </div>
@@ -126,6 +131,7 @@ class AddProject extends Component {
                       className="form-control form-control-lg"
                       name="end_date"
                       value={this.state.end_date}
+                      //BIND input value to state
                       onChange={this.onChange}
                     />
                   </div>

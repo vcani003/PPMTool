@@ -12,7 +12,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { projects } = this.props.project;
+    const { projects } = this.props.topProject;
     return (
       <div className="projects">
         <div className="container">
@@ -36,14 +36,16 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  project: PropTypes.object.isRequired,
+  topProject: PropTypes.object.isRequired,
   getProjects: PropTypes.func.isRequired
 };
 
+//1st arg of connect
 const mapStateToProps = state => ({
-  project: state.project
+  topProject: state.project //from index.js in reducers folder
 });
 
+//connect has 2 arguments, first one is to get the data from redux store, 2nd to send to redux store (ProjectActions.js dispatch)
 export default connect(
   mapStateToProps,
   { getProjects }
